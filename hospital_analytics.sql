@@ -29,7 +29,7 @@ ORDER BY COUNT(patient) DESC;
 -- a. What percentage of patients had what healthcare? 
 
 SELECT p.name AS payer,
-    ROUND(COUNT(e.id) / (SELECT COUNT(id) FROM hospital_db.encounters) * 100, 2) AS percentage
+    ROUND(COUNT(DISTINCT e.id) / (SELECT COUNT(DISTINCT id) FROM hospital_db.encounters) * 100, 2) AS percentage
 FROM hospital_db.encounters e
 JOIN hospital_db.payers p ON p.id = e.payer
 GROUP BY p.name
